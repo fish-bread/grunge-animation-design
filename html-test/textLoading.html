@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .text-loader {
+        width: 500px;
+        height: 160px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .text-loader-big {
+        height: 90px;
+        width: 80%;
+    }
+    .text-loader-small {
+        height: 60px;   
+        width: 100%;
+    }
+    .background-animation {
+        animation: animate 1.5s linear infinite;
+        background: linear-gradient(to right, #b8b8b8, #e7e7e7, #b8b8b8 );
+        background-size: 200% 100%;
+        border-radius: 5px;
+    }
+    @keyframes animate {
+        0% {
+            background-position: 100% 50%;
+        }
+        
+        100% {
+            background-position: 0 50%;
+        }
+    }
+</style>
+<body>
+<div class="text-loader">
+    <div class="text-loader-big background-animation"></div>
+    <div class="text-loader-small background-animation"></div>
+</div>
+</body>
+</html>

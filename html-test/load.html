@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+</head>
+<style>
+    body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;    
+        justify-content: center;
+    }
+    .loader {
+        width: 300px;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: center;
+        align-items: flex-end;
+        align-content: center;
+    }
+    .loader_ball {
+        background-color: #ff9999;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        animation: select 1s ease-in-out infinite;
+    }
+    @keyframes select {
+        0% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-25px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+    .loader_ball:nth-child(1) { animation-delay: 0s; }
+    .loader_ball:nth-child(2) { animation-delay: 0.1s; }
+    .loader_ball:nth-child(3) { animation-delay: 0.2s; }
+    .loader_ball:nth-child(4) { animation-delay: 0.3s; }
+    .loader_ball:nth-child(5) { animation-delay: 0.4s; }
+</style>
+<body>
+<div class="loader">
+    <div class="loader_ball"></div>
+    <div class="loader_ball"></div>
+    <div class="loader_ball"></div>
+    <div class="loader_ball"></div>
+    <div class="loader_ball"></div>
+</div>
+</body>
+<script>
+    
+</script>
+</html>
