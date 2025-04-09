@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: none;
+    }
+    .mouse-move-box {
+        position: fixed;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #99ccff;
+        z-index: 9999;
+        transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+    }
+</style>
+<body>
+<div class="mouse-move-box"></div>
+<button>点击</button>
+</body>
+<script>
+    const follower = document.querySelector('.mouse-move-box');
+    let mouseX = 0, mouseY = 0;
+    let posX = 0, posY = 0;
+    const ease = 0.15; // 缓动系数，值越小跟随越慢
+    
+    document.addEventListener('mousemove', (e) => {
+        follower.style.display = 'block';
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    document.addEventListener('mouseleave', () => {
+        console.log('鼠标离开了页面');
+        follower.style.display = 'none';
+    });
+    function animate() {
+        // 计算新位置（带缓动）
+        posX += (mouseX - posX) * ease;
+        posY += (mouseY - posY) * ease;
+        // 更新位置
+        follower.style.left = `${posX}px`;
+        follower.style.top = `${posY}px`;
+
+        requestAnimationFrame(animate);
+    }
+    // 启动动画
+    animate();
+</script>
+</html>
