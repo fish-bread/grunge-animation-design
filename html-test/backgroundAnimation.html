@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>背景版</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .dark-back {
+        width: 100px;
+        height: 100px;
+        background-color: black;
+        border-radius: 50%;
+        transition: width 0.5s, height 0.5s, border-radius 0.5s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .change-back {
+        width: 100px;
+        height: 100px;
+        background-color: #e7e7e7;
+        border-radius: 50%;
+    }
+</style>
+<body>
+<div class="dark-back">
+    <button class="change-back"></button>
+</div>
+</body>
+<script>
+    const darkBack = document.querySelector('.dark-back');
+    const darkBackBtn = document.querySelector('.change-back');
+    darkBackBtn.addEventListener('click', () => {
+        if (darkBack.style.width === '100%' && darkBack.style.height === '100%') {
+            darkBack.style.width = '100px';
+            darkBack.style.height = '100px';
+            darkBack.style.borderRadius = '50%';
+        } else {
+            darkBack.style.width = '100%';
+            darkBack.style.height = '100%';
+            darkBack.style.borderRadius = '0';
+        }
+    })
+</script>
+</html>

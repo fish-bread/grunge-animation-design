@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滑动按钮效果</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .button-box {
+        position: relative;
+        width: 270px;
+        height: 50px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px;
+        flex-direction: row;
+    }
+    .button-box .no-hover-button {
+        all: unset;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        background-color: #e7e7e7;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+    }
+    .button-box .hover-button {
+        background-color: transparent;
+    }
+    .slider {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        background-color: #f6a0a0;
+        transition: all 0.3s ease;
+        z-index: 0;
+        left: 5px;
+    }
+</style>
+<body>
+<div class="button-box">
+    <div class="slider"></div>
+    <button class="no-hover-button" data-index="0"></button>
+    <button class="no-hover-button" data-index="1"></button>
+    <button class="no-hover-button" data-index="2"></button>
+    <button class="no-hover-button" data-index="3"></button>
+    <button class="no-hover-button" data-index="4"></button>
+</div>
+</body>
+<script>
+    const buttons = document.querySelectorAll('.no-hover-button');
+    const slider = document.querySelector('.slider');
+
+    // 计算按钮位置
+    function calculatePosition(index) {
+        const buttonWidth = 50; // 按钮宽度
+        const gap = 5; // 按钮间距
+        const padding = 0; // 容器内边距
+        return padding + index * (buttonWidth + gap);
+    }
+
+    // 初始化滑块位置
+    slider.style.transform = `translateX(${calculatePosition(0)}px)`;
+
+    // 为每个按钮添加点击事件
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const index = parseInt(button.getAttribute('data-index'));
+            slider.style.transform = `translateX(${calculatePosition(index)}px)`;
+
+            // 移除所有按钮的active类
+            buttons.forEach(btn => btn.classList.remove('hover-button'));
+            // 为当前按钮添加active类
+            button.classList.add('hover-button');
+        });
+    });
+</script>
+</html>

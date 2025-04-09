@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滚动条</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #8e8888;
+    }
+    .drag-body {
+        width: 200px;
+        height: 200px;
+        overflow: auto;
+    }
+    .drag-body::-webkit-scrollbar {
+        appearance: none;
+        width: 10px;
+        height: 10px;
+    }
+    .drag-body::-webkit-scrollbar-track {
+       background: #ff9999;
+    }
+    .drag-body::-webkit-scrollbar-thumb {
+        background: #e4e4e4;
+        border-radius: 10px;
+    }
+    .drag-body::-webkit-scrollbar-thumb:hover {
+        background: #ffffff;
+    }
+    .full {
+        height: 300px;
+        width: 300px;
+        background-color: #ff9999;
+    }
+</style>
+<body>
+<div class="drag-body">
+    <div class="full"></div>
+</div>
+</body>
+</html>
