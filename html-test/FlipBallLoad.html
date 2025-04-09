@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+</head>
+<style>
+    body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .loader {
+        width: 300px;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: center;
+        align-items: flex-end;
+        align-content: center;
+    }
+    .loader_ball {
+        background-color: #cdcdcd;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        animation:  select 1s ease-in-out forwards;
+    }
+    .rotate_ball {
+        background-color: #cdcdcd;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        animation: rotate 1s ease-in-out forwards;
+    }
+
+    @keyframes select {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(35px);
+        }
+    }
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg) translateX(0) rotate(0deg);
+        }
+        100% {
+            transform: rotate(180deg) translateX(140px) rotate(-180deg);
+        }
+    }
+    .loader_ball:nth-child(1) { animation-delay: 0s; }
+    .loader_ball:nth-child(2) { animation-delay: 0.1s; }
+    .loader_ball:nth-child(3) { animation-delay: 0.2s; }
+    .loader_ball:nth-child(4) { animation-delay: 0.3s; }
+</style>
+<body>
+<div class="loader">
+    <div class="loader_ball"></div>
+    <div class="loader_ball"></div>
+    <div class="loader_ball"></div>
+    <div class="loader_ball"></div>
+    <div class="rotate_ball"></div>
+</div>
+</body>
+<script>
+    function resetAnimation() {
+        setInterval(() => {
+            const loader = document.querySelector('.loader');
+            const balls = Array.from(document.querySelectorAll('.loader_ball, .rotate_ball'));
+
+            // 1. 找到当前的rotate_ball并变为loader_ball
+            const currentRotateIndex = balls.findIndex(ball => ball.classList.contains('rotate_ball'));
+            balls[currentRotateIndex].classList.replace('rotate_ball', 'loader_ball');
+
+            // 2. 找到新的rotate_ball（前一个球）
+            const newRotateIndex = (currentRotateIndex  + balls.length) % balls.length;
+            balls[newRotateIndex].classList.replace('loader_ball', 'rotate_ball');
+
+            // 3. 重新排序DOM元素，使rotate_ball始终在最后
+            balls.forEach(ball => loader.appendChild(ball));
+
+            // 4. 重置所有动画
+            balls.forEach(ball => {
+                ball.style.animation = 'none';
+                void ball.offsetWidth; // 触发重绘
+                if(ball.classList.contains('loader_ball')) {
+                    ball.style.animation = 'select 1s ease-in-out forwards';
+                } else {
+                    ball.style.animation = 'rotate 1s ease-in-out forwards';
+                }
+            });
+
+            // 5. 重新设置动画延迟
+            balls.forEach((ball, index) => {
+                if(ball.classList.contains('loader_ball')) {
+                    ball.style.animationDelay = `${index * 0.1}s`;
+                }
+            });
+            console.log('旋转')
+        }, 1300);
+    }
+
+    resetAnimation();
+</script>
+</html>

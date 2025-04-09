@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .progress-body {
+        width: 400px;
+        gap: 10px;
+        box-sizing: border-box;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+    .progress-body input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 10px;
+        border-radius: 4px;
+        background: linear-gradient(to right, #ffa200 0%, #ececec 0%);
+        background-size: 100% 100%;
+    }
+    .progress-body input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: #e7e7e7;   /* 灰色拇指 */
+        width: 15px;               /* 拇指宽度 */
+        height: 15px;             /* 拇指高度（比轨道高） */
+        border-radius: 50%;       /* 轻微圆角 */
+        cursor: pointer;
+    }
+    .progress-body input::-webkit-slider-thumb:hover {
+        background-color: #f4f4f4;
+    }
+    .progress-body .progress-download-body {
+        width: 100%;
+        height: 10px;
+        background-color: #ececec;
+        box-sizing: border-box;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .progress-download-body .progress-download-inside {
+        background-color: #ff9999;
+        width: 0;
+        height: 10px;
+    }
+    </style>
+<body>
+<div class="progress-body">
+    <!--滚动条-->
+    <input type="range" max="100" min="0" step="1" value="0" id="progress-bar" oninput="changeProgress()" />
+    <!---进度条-->
+    <div class="progress-download-body">
+        <div class="progress-download-inside" id="progress-download-bar"></div>
+    </div>
+</div>
+</body>
+<script>
+    const progressBar = document.getElementById('progress-bar');
+    const progressDownloadBar = document.getElementById('progress-download-bar');
+    let downloadVal = 5;
+    let progressVal = 0;
+    <!--拖动条-->
+    function changeProgress() {
+        progressVal = parseFloat(progressBar.value);
+        console.log('拖动进度',progressVal);
+        // 设置渐变背景，颜色变化不超过滑块位置
+        progressBar.style.background = `linear-gradient(to right, #ffa200 ${progressVal}%, #ececec ${progressVal}%)`;
+    }
+    changeProgress();
+    <!--下载条-->
+    function changeDownloadProgress() {
+        setInterval(()=>{
+            if (downloadVal >= 100) {
+                downloadVal = 0;
+            } else {
+                downloadVal += 0.5 + Math.random() * 2;
+            }
+           progressDownloadBar.style.width = `${Math.min(downloadVal, 100)}%`; 
+            console.log('下载进度',progressDownloadBar.style.width);
+        }, 500);
+    }
+    changeDownloadProgress();
+</script>
+</html>
